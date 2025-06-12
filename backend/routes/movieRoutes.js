@@ -1,9 +1,11 @@
 const express = require('express');
-const router = express.Router();
-const movieController = require('../controllers/movieController');
+const { getAllMovies, getMovieById, recommendMovies } = require('../controllers/movieController');
+const auth = require('../middleware/auth');
 
-router.get('/', movieController.getAllMovies);
-router.get('/search', movieController.searchMovies);
-router.get('/:id', movieController.getMovieById);
+const router = express.Router();
+
+router.get('/', getAllMovies);
+router.get('/:id', getMovieById);
+router.get('/recommendations', auth, recommendMovies);
 
 module.exports = router;

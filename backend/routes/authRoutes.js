@@ -1,13 +1,9 @@
 const express = require('express');
+const { register, login } = require('../controllers/authController');
+
 const router = express.Router();
-const authController = require('../controllers/authController');
-const { verifyToken } = require('../middleware/authMiddleware');
-const movieController = require('../controllers/movieController');
 
-// Protected route
-router.get('/', verifyToken, movieController.getAllMovies);
-
-router.post('/register', authController.register);
-router.post('/login', authController.login);
+router.post('/register', register);
+router.post('/login', login);
 
 module.exports = router;
